@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router";
 import "./App.css";
 import Menu from "./pages/menu.tsx";
 import Cart from "./pages/cart.tsx";
+import AdminPage from "./pages/AdminPage.tsx";
+import AddItemPage from "./pages/AddItemPage.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -11,6 +13,8 @@ createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route path="/" element={<Menu />} />
         <Route path="/carrinho-de-compras" element={<Cart />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/admin/add-item" element={<AddItemPage />} />
       </Routes>
     </Router>
   </StrictMode>
