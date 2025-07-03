@@ -45,7 +45,7 @@ export default function AdminPage() {
             className="flex-1 bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm"
           />
           <button
-            onClick={() => navigate("/add-item")}
+            onClick={() => navigate("/add-item-menu")}
             className="bg-[#FF6B00] text-white rounded-full p-2 hover:bg-orange-600 transition"
           >
             <Plus size={20} />
