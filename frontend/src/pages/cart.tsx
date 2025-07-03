@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import arrowLeft from "../assets/arrow-left.svg";
 import MyItemCart from "../components/my-item-cart";
 
@@ -6,15 +7,15 @@ export default function Cart() {
     <>
       <div className="bg-blue">
         <div className="px-5 pb-5 pt-27 flex items-center justify-between">
-          <button
-            type="button"
+          <Link
+            to={"/"}
             className="flex items-center justify-center cursor-pointer"
           >
             <img
               src={arrowLeft}
               alt="ícone do botão para voltar à página anterior w-6 h-6"
             />
-          </button>
+          </Link>
 
           <p className="grow text-white text-4xl text-center">
             Carrinho de compras
