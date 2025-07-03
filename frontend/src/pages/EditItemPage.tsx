@@ -1,14 +1,16 @@
-// src/pages/AddItemPage.tsx
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react"; // use Lucide ou outro pacote de ícones
+// src/pages/EditItemPage.tsx
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
-export default function AddItemPage() {
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
+export default function EditItemPage() {
+  const { id } = useParams(); // para uso futuro (carregar item pelo ID)
+  const navigate = useNavigate();
+
+  const [name, setName] = useState("Cachorro-quente");
+  const [price, setPrice] = useState("8.00");
   const [available, setAvailable] = useState(true);
   const [image, setImage] = useState<File | null>(null);
-  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,10 +21,7 @@ export default function AddItemPage() {
     formData.append("available", String(available));
     if (image) formData.append("image", image);
 
-    console.log("Item enviado:", Object.fromEntries(formData.entries()));
-    // Aqui você pode salvar no localStorage ou enviar pro backend
-
-    // Redireciona de volta ao painel admin
+    console.log("Item editado:", Object.fromEntries(formData.entries()));
     navigate("/admin");
   };
 
@@ -33,7 +32,7 @@ export default function AddItemPage() {
         <button onClick={() => navigate(-1)}>
           <ArrowLeft size={24} />
         </button>
-        <span className="font-semibold">Adicionar item ao menu</span>
+        <span className="font-semibold">Editar item</span>
         <button onClick={() => navigate("/admin")} className="text-sm">
           Voltar
         </button>
@@ -44,7 +43,7 @@ export default function AddItemPage() {
         onSubmit={handleSubmit}
         className="p-6 flex flex-col gap-4 max-w-md mx-auto"
       >
-        {/* Upload de imagem */}
+        {/* Imagem */}
         <label className="flex flex-col items-center justify-center border border-dashed border-gray-400 rounded-lg h-40 cursor-pointer">
           <input
             type="file"
@@ -59,33 +58,31 @@ export default function AddItemPage() {
               className="h-24 object-contain"
             />
           ) : (
-            <>
-              <img src="/upload-icon.png" alt="Upload" className="h-10 mb-2" />
-              <span className="text-sm text-gray-500">
-                Faça o upload da imagem
-              </span>
-            </>
+            <img
+              src="/hot-dog.png"
+              alt="Item atual"
+              className="h-24 object-contain"
+            />
           )}
+          <span className="text-sm text-gray-500 mt-1">
+            Faça o upload da imagem
+          </span>
         </label>
 
         {/* Nome */}
         <input
           type="text"
-          placeholder="Nome *"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          required
-          className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none"
+          className="w-full border border-gray-300 rounded px-3 py-2"
         />
 
         {/* Preço */}
         <input
           type="number"
-          placeholder="Preço *"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-          required
-          className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none"
+          className="w-full border border-gray-300 rounded px-3 py-2"
         />
 
         {/* Disponível */}
