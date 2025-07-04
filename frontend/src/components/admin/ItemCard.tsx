@@ -1,13 +1,34 @@
-// src/components/admin/ItemCard.tsx
-export default function ItemCard({ item }) {
+import type { Item } from "../../utils/definitions";
+import { useNavigate } from "react-router";
+import pencil from "../../assets/pencil.svg";
+
+export default function ItemCard({ item }: { item: Item }) {
+  const navigate = useNavigate();
+
   return (
-    <div className="bg-white p-4 rounded shadow">
-      <img src={item.image} alt={item.name} className="h-20 mx-auto" />
-      <p className="text-center font-bold">{item.name}</p>
-      <p className="text-center text-sm">R$ {item.price}</p>
-      <div className="flex justify-around mt-2">
-        <button className="text-blue-600">Editar</button>
-        <button className="text-red-600">Excluir</button>
+    <div className="bg-[#fff] shadow rounded-[23px] py-[15px]">
+      <div>
+        <img
+          src={item.img}
+          alt="imagem do cachorro-quente"
+          className="w-24 h-24 mx-auto"
+        />
+      </div>
+
+      <div className="flex flex-col justify-between items-start mt-4 px-3">
+        <p className="text-2xl">{item.name}</p>
+
+        <div className="flex justify-between items-center w-full mt-2">
+          <p className="font-lato text-gray">R$ {item.price}</p>
+
+          <button
+            type="button"
+            className="bg-orange flex justify-center items-center w-7 h-7 rounded-[10px]"
+            onClick={() => navigate(`edit-item/${item.id}`)}
+          >
+            <img src={pencil} alt="imagem de adição" />
+          </button>
+        </div>
       </div>
     </div>
   );

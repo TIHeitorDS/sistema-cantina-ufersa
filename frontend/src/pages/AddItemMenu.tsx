@@ -1,7 +1,6 @@
 // src/pages/AddItemMenu.tsx
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router";
 
 export default function AddItemMenu() {
   const [name, setName] = useState("");
@@ -27,15 +26,10 @@ export default function AddItemMenu() {
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Cabeçalho */}
-      <div className="bg-[#005C73] text-white py-4 px-6 flex items-center justify-between rounded-b-xl">
-        <button onClick={() => navigate(-1)}>
-          <ArrowLeft size={24} />
-        </button>
-        <span className="font-semibold">Adicionar item ao menu</span>
-        <button onClick={() => navigate("/admin")} className="text-sm">
-          Voltar
-        </button>
+      <div className="bg-[#005C73] text-white pt-27 pb-5 px-6 text-center text-[32px] font-bold">
+        Gerenciamento de itens
       </div>
+
 
       {/* Formulário */}
       <form

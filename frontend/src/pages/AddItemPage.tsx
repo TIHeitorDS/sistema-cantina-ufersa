@@ -1,7 +1,7 @@
 // src/pages/AddItemPage.tsx
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react"; // use Lucide ou outro pacote de ícones
+import { useNavigate } from "react-router";
+import BackButton from "../components/back-button";
 
 export default function AddItemPage() {
   const [name, setName] = useState("");
@@ -29,22 +29,18 @@ export default function AddItemPage() {
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Header */}
-      <div className="bg-[#005C73] text-white py-4 px-6 flex items-center justify-between rounded-b-xl">
-        <button onClick={() => navigate(-1)}>
-          <ArrowLeft size={24} />
-        </button>
-        <span className="font-semibold">Adicionar item ao menu</span>
-        <button onClick={() => navigate("/admin")} className="text-sm">
-          Voltar
-        </button>
+      <div className="bg-[#005C73] text-white pt-27 pb-5 px-6 text-center text-[32px] font-bold">
+        Adicionar item ao menu
       </div>
 
-      {/* Formulário */}
+      <div className="p-4 max-w-md mx-auto space-y-4">
+        <BackButton />
+      </div>
+
       <form
         onSubmit={handleSubmit}
-        className="p-6 flex flex-col gap-4 max-w-md mx-auto"
+        className="p-4 flex flex-col gap-4 max-w-md mx-auto"
       >
-        {/* Upload de imagem */}
         <label className="flex flex-col items-center justify-center border border-dashed border-gray-400 rounded-lg h-40 cursor-pointer">
           <input
             type="file"
@@ -68,7 +64,6 @@ export default function AddItemPage() {
           )}
         </label>
 
-        {/* Nome */}
         <input
           type="text"
           placeholder="Nome *"
@@ -78,7 +73,6 @@ export default function AddItemPage() {
           className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none"
         />
 
-        {/* Preço */}
         <input
           type="number"
           placeholder="Preço *"
@@ -88,21 +82,23 @@ export default function AddItemPage() {
           className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none"
         />
 
-        {/* Disponível */}
-        <div className="flex items-center justify-between">
-          <span className="text-sm">Está disponível?</span>
+        <div className="flex items-center mt-2 justify-between">
+          <label htmlFor="available" className="text-sm">
+            Está disponível?
+          </label>
+
           <input
             type="checkbox"
+            id="available"
             checked={available}
             onChange={(e) => setAvailable(e.target.checked)}
             className="h-5 w-5 text-orange-500"
           />
         </div>
 
-        {/* Botão */}
         <button
           type="submit"
-          className="bg-[#FF6B00] text-white w-full py-3 rounded-lg text-lg font-semibold hover:bg-orange-600 transition"
+          className="bg-orange mt-17.5 text-white w-full py-3 rounded-lg text-lg font-semibold hover:bg-orange-600 transition"
         >
           Salvar item
         </button>

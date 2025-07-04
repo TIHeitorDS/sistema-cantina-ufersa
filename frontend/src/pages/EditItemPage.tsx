@@ -1,7 +1,6 @@
-// src/pages/EditItemPage.tsx
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import BackButton from "../components/back-button";
 
 export default function EditItemPage() {
   const { id } = useParams(); // para uso futuro (carregar item pelo ID)
@@ -28,14 +27,12 @@ export default function EditItemPage() {
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Header */}
-      <div className="bg-[#005C73] text-white py-4 px-6 flex items-center justify-between rounded-b-xl">
-        <button onClick={() => navigate(-1)}>
-          <ArrowLeft size={24} />
-        </button>
-        <span className="font-semibold">Editar item</span>
-        <button onClick={() => navigate("/admin")} className="text-sm">
-          Voltar
-        </button>
+      <div className="bg-[#005C73] text-white pt-27 pb-5 px-6 text-center text-[32px] font-bold">
+        Editar item do menu
+      </div>
+
+      <div className="p-4 max-w-md mx-auto space-y-4">
+        <BackButton />
       </div>
 
       {/* Formulário */}
@@ -86,7 +83,7 @@ export default function EditItemPage() {
         />
 
         {/* Disponível */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-2">
           <span className="text-sm">Está disponível?</span>
           <input
             type="checkbox"
@@ -99,7 +96,7 @@ export default function EditItemPage() {
         {/* Botão */}
         <button
           type="submit"
-          className="bg-[#FF6B00] text-white w-full py-3 rounded-lg text-lg font-semibold hover:bg-orange-600 transition"
+          className="bg-[#FF6B00] mt-17.5 text-white w-full py-3 rounded-lg text-lg font-semibold hover:bg-orange-600 transition"
         >
           Salvar item
         </button>
