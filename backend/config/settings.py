@@ -57,6 +57,8 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://taupe-sorbet-1df0b5.netlify.app",
+    "http://192.168.1.9:5173",
 ]
 
 ROOT_URLCONF = 'config.urls'

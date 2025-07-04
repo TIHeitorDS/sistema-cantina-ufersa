@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import BackButton from "../components/back-button";
 
 export default function EditItemPage() {
-  const { id } = useParams(); // para uso futuro (carregar item pelo ID)
+  // const { id } = useParams(); // para uso futuro (carregar item pelo ID)
   const navigate = useNavigate();
 
   const [name, setName] = useState("Cachorro-quente");

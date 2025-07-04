@@ -16,10 +16,10 @@ export default function ItemCard({ item }: { item: Item }) {
       </div>
 
       <div className="flex flex-col justify-between items-start mt-4 px-3">
-        <p className="text-2xl">{item.name}</p>
+        <p className="text-2xl">{item.nome}</p>
 
         <div className="flex justify-between items-center w-full mt-2">
-          <p className="font-lato text-gray">R$ {item.price}</p>
+          <p className="font-lato text-gray">R$ {item.preco}</p>
 
           <button
             type="button"

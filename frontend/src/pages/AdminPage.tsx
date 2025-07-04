@@ -4,10 +4,10 @@ import type { Item } from "../utils/definitions";
 import BackButton from "../components/back-button";
 
 const items: Item[] = [
-  { id: 1, name: "Item", price: 8.0, img: "/hot-dog.png", isAvailable: true },
-  { id: 2, name: "Item", price: 8.0, img: "/hot-dog.png", isAvailable: true },
-  { id: 3, name: "Item", price: 9.0, img: "/hot-dog.png", isAvailable: true },
-  { id: 4, name: "Item", price: 8.0, img: "/hot-dog.png", isAvailable: true },
+  { id: 1, nome: "Item", preco: 8.0, img: "/hot-dog.png", disponivel: true },
+  { id: 2, nome: "Item", preco: 8.0, img: "/hot-dog.png", disponivel: true },
+  { id: 3, nome: "Item", preco: 9.0, img: "/hot-dog.png", disponivel: true },
+  { id: 4, nome: "Item", preco: 8.0, img: "/hot-dog.png", disponivel: true },
 ];
 
 export default function AdminPage() {
