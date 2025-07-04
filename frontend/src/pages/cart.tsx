@@ -6,14 +6,15 @@ export default function Cart() {
   return (
     <>
       <div className="bg-blue">
-        <div className="px-5 pb-5 pt-27 flex items-center justify-between">
+        <div className="px-5 pb-5 pt-27 flex items-center justify-between gap-0.5">
           <Link
             to={"/"}
             className="flex items-center justify-center cursor-pointer"
           >
             <img
               src={arrowLeft}
-              alt="ícone do botão para voltar à página anterior w-6 h-6"
+              alt="ícone do botão para voltar à página anterior"
+              className="w-6 h-6 object-cover"
             />
           </Link>
 
@@ -24,8 +25,6 @@ export default function Cart() {
       </div>
 
       <div className="flex flex-col gap-9 pt-5 px-9.25">
-        <MyItemCart />
-        <MyItemCart />
         <MyItemCart />
 
         <div className="w-full">

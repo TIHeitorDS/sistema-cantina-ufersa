@@ -1,7 +1,7 @@
 export interface Item {
-  id?: number; // Optional for new items
-  name: string;
-  price: number;
+  id: number; // Optional for new items
+  nome: string;
+  preco: number;
   img: string;
-  isAvailable: boolean;
+  disponivel: boolean;
 }

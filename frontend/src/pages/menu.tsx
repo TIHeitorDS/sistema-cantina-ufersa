@@ -1,13 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import ItemCard from "../components/item-card";
+import { fetchItems } from "../utils/query";
+import type { Item } from "../utils/definitions";
 
 export default function Menu() {
   const [itemsQty, setItemsQty] = useState<number>(0);
+  const [items, setItems] = useState<any[]>([]); // Ajuste o tipo conforme necessário
 
-  function addItemToCart() {
+  useEffect(() => {
+    fetchItems().then((data) => {
+      setItems(data);
+    });
+  }, []);
+
+  function addItemToCart(item: Item) {
     setItemsQty((prevQty) => prevQty + 1);
+    
+    localStorage.setItem(`cart-${item.id}`, JSON.stringify(item));
   }
 
   return (
@@ -15,11 +26,9 @@ export default function Menu() {
       <Header />
 
       <div className="mt-6 px-9 grid grid-cols-2 lg:grid-cols-5 mx-auto gap-6 overflow-scroll h-[450px] pb-24">
-        <ItemCard addItemToCart={addItemToCart} />
-        <ItemCard addItemToCart={addItemToCart} />
-        <ItemCard addItemToCart={addItemToCart} />
-        <ItemCard addItemToCart={addItemToCart} />
-        <ItemCard addItemToCart={addItemToCart} />
+        {items.map((item) => (
+          <ItemCard key={item.id} item={item} addItemToCart={addItemToCart} />
+        ))}
       </div>
 
       <Footer itemsQty={itemsQty} />
