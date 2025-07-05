@@ -6,6 +6,6 @@ router = routers.DefaultRouter()
 router.register(r'produtos', CardapioViewSet)
 
 urlpatterns = [
-     path('api/', include(router.urls)), 
+    path('api/', include(router.urls)), 
     path('cardapio/', cardapio_list, name='cardapio_list'),
 ]

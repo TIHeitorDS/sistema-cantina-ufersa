@@ -1,27 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import BackButton from "../components/back-button";
+import type { Item } from "../utils/definitions";
+import { fetchItem, updateItem } from "../utils/query";
 
 export default function EditItemPage() {
-  const { id } = useParams(); // para uso futuro (carregar item pelo ID)
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  const [name, setName] = useState("Cachorro-quente");
-  const [price, setPrice] = useState("8.00");
-  const [available, setAvailable] = useState(true);
   const [image, setImage] = useState<File | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [item, setItem] = useState<Item>({
+    id: 0,
+    nome: "",
+    preco: 0,
+    disponivel: false,
+    imagem: "",
+  });
+
+  useEffect(() => {
+    if (!id) return;
+
+    const loadItem = async () => {
+      try {
+        const data = await fetchItem(Number(id));
+        setItem(data);
+      } catch (error) {
+        console.error("Erro ao buscar item:", error);
+      }
+    };
+
+    loadItem();
+  }, [id]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("price", price);
-    formData.append("available", String(available));
-    if (image) formData.append("image", image);
-
-    console.log("Item editado:", Object.fromEntries(formData.entries()));
-    navigate("/admin");
+    try {
+      const updatedItem = await updateItem(
+        item.id,
+        item.nome,
+        item.preco,
+        item.disponivel,
+        image ?? undefined // Use a imagem nova, se houver
+      );
+      console.log("Item atualizado:", updatedItem);
+      navigate("/admin");
+    } catch (error) {
+      console.error("Erro ao atualizar item:", error);
+    }
   };
 
   return (
@@ -55,11 +81,13 @@ export default function EditItemPage() {
               className="h-24 object-contain"
             />
           ) : (
-            <img
-              src="/hot-dog.png"
-              alt="Item atual"
-              className="h-24 object-contain"
-            />
+            item.imagem && (
+              <img
+                src={item.imagem}
+                alt="Item atual"
+                className="h-24 object-contain"
+              />
+            )
           )}
           <span className="text-sm text-gray-500 mt-1">
             Faça o upload da imagem
@@ -69,16 +97,23 @@ export default function EditItemPage() {
         {/* Nome */}
         <input
           type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={item.nome}
+          onChange={(e) =>
+            setItem((prev) => ({ ...prev, nome: e.target.value }))
+          }
           className="w-full border border-gray-300 rounded px-3 py-2"
         />
 
         {/* Preço */}
         <input
           type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          value={item.preco}
+          onChange={(e) =>
+            setItem((prev) => ({
+              ...prev,
+              preco: parseFloat(e.target.value) || 0,
+            }))
+          }
           className="w-full border border-gray-300 rounded px-3 py-2"
         />
 
@@ -87,8 +122,10 @@ export default function EditItemPage() {
           <span className="text-sm">Está disponível?</span>
           <input
             type="checkbox"
-            checked={available}
-            onChange={(e) => setAvailable(e.target.checked)}
+            checked={item.disponivel}
+            onChange={(e) =>
+              setItem((prev) => ({ ...prev, disponivel: e.target.checked }))
+            }
             className="h-5 w-5 text-orange-500"
           />
         </div>

@@ -4,14 +4,14 @@ export default function ItemCard({
   item,
   addItemToCart,
 }: {
-  item: Item
+  item: Item;
   addItemToCart: (item: Item) => void;
 }) {
   return (
     <div className="bg-[#fff] h-fit shadow rounded-[23px] py-[15px]">
       <div>
         <img
-          src="/hot-dog.png"
+          src={item.imagem}
           alt="imagem do cachorro-quente"
           className="w-24 h-24 mx-auto"
         />

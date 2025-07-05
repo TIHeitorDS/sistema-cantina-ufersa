@@ -9,17 +9,17 @@ export default function ItemCard({ item }: { item: Item }) {
     <div className="bg-[#fff] shadow rounded-[23px] py-[15px]">
       <div>
         <img
-          src={item.img}
+          src={item.imagem}
           alt="imagem do cachorro-quente"
-          className="w-24 h-24 mx-auto"
+          className="w-24 h-24 mx-auto object-fill rounded-2xl"
         />
       </div>
 
       <div className="flex flex-col justify-between items-start mt-4 px-3">
-        <p className="text-2xl">{item.name}</p>
+        <p className="text-2xl">{item.nome}</p>
 
         <div className="flex justify-between items-center w-full mt-2">
-          <p className="font-lato text-gray">R$ {item.price}</p>
+          <p className="font-lato text-gray">R$ {item.preco}</p>
 
           <button
             type="button"

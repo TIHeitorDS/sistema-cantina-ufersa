@@ -1,17 +1,26 @@
 import { useNavigate } from "react-router";
 import ItemCard from "../components/admin/ItemCard";
-import type { Item } from "../utils/definitions";
 import BackButton from "../components/back-button";
-
-const items: Item[] = [
-  { id: 1, name: "Item", price: 8.0, img: "/hot-dog.png", isAvailable: true },
-  { id: 2, name: "Item", price: 8.0, img: "/hot-dog.png", isAvailable: true },
-  { id: 3, name: "Item", price: 9.0, img: "/hot-dog.png", isAvailable: true },
-  { id: 4, name: "Item", price: 8.0, img: "/hot-dog.png", isAvailable: true },
-];
+import type { Item } from "../utils/definitions";
+import { useEffect, useState } from "react";
+import { fetchItems } from "../utils/query";
 
 export default function AdminPage() {
   const navigate = useNavigate();
+  const [items, setItems] = useState<Item[]>([]);
+
+  useEffect(() => {
+    const loadItems = async () => {
+      try {
+        const fetchedItems = await fetchItems();
+        setItems(fetchedItems);
+      } catch (error) {
+        console.error("Erro ao buscar itens:", error);
+      }
+    };
+
+    loadItems();
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#F5F5F5] text-black">
