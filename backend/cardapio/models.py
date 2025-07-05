@@ -7,4 +7,4 @@ class Produto(models.Model):
     disponivel = models.BooleanField(default=True)
     
     def __str__(self):
-        return super().__str__()
+        return self.nome
