@@ -58,7 +58,10 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "http://celebrated-dango-a9dbad.netlify.app",
 ]
+
+CRFS_TRUSTED_ORIGINS = ['https://cantina-api.heitor.grupo-02.dependabilidade.ufersa.dev.br']
 
 ROOT_URLCONF = 'config.urls'
 
