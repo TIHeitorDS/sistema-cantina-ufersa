@@ -13,7 +13,7 @@ export default function ItemCard({
         <img
           src={item.imagem}
           alt="imagem do cachorro-quente"
-          className="w-24 h-24 mx-auto"
+          className="w-24 h-24 mx-auto object-fill rounded-2xl"
         />
       </div>
 

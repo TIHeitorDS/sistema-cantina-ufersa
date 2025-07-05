@@ -36,8 +36,16 @@ export default function EditItemPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const updatedItem = await updateItem(item);
-      console.log("Item atualizado:", updatedItem);
+      let imagemString = item.imagem;
+      if (image) {
+        imagemString = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = reject;
+          reader.readAsDataURL(image);
+        });
+      }
+      await updateItem({ ...item, imagem: imagemString });
       navigate("/admin");
     } catch (error) {
       console.error("Erro ao atualizar item:", error);
