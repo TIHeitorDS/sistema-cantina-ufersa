@@ -1,17 +1,26 @@
 import { useNavigate } from "react-router";
 import ItemCard from "../components/admin/ItemCard";
-import type { Item } from "../utils/definitions";
 import BackButton from "../components/back-button";
-
-const items: Item[] = [
-  { id: 1, nome: "Item", preco: 8.0, img: "/hot-dog.png", disponivel: true },
-  { id: 2, nome: "Item", preco: 8.0, img: "/hot-dog.png", disponivel: true },
-  { id: 3, nome: "Item", preco: 9.0, img: "/hot-dog.png", disponivel: true },
-  { id: 4, nome: "Item", preco: 8.0, img: "/hot-dog.png", disponivel: true },
-];
+import type { Item } from "../utils/definitions";
+import { useEffect, useState } from "react";
+import { fetchItems } from "../utils/query";
 
 export default function AdminPage() {
   const navigate = useNavigate();
+  const [items, setItems] = useState<Item[]>([]);
+
+  useEffect(() => {
+    const loadItems = async () => {
+      try {
+        const fetchedItems = await fetchItems();
+        setItems(fetchedItems);
+      } catch (error) {
+        console.error("Erro ao buscar itens:", error);
+      }
+    };
+
+    loadItems();
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#F5F5F5] text-black">
@@ -24,7 +33,7 @@ export default function AdminPage() {
 
         <div className="flex items-center justify-between gap-2">
           <button
-            onClick={() => navigate("add-item")}
+            onClick={() => navigate("/admin/add-item")}
             className="p-2 flex justify-between items-center gap-2 bg-white rounded-lg shadow border border-[#f2f2f2] w-full"
           >
             <span className="font-lato text-[#000000]/25">Adicionar item</span>

@@ -1,6 +1,5 @@
-// src/pages/AddItemPage.tsx
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { createItem } from "../utils/query";
 import BackButton from "../components/back-button";
 
 export default function AddItemPage() {
@@ -8,27 +7,28 @@ export default function AddItemPage() {
   const [price, setPrice] = useState("");
   const [available, setAvailable] = useState(true);
   const [image, setImage] = useState<File | null>(null);
-  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("price", price);
-    formData.append("available", String(available));
-    if (image) formData.append("image", image);
+    if (!name || !price || !image) {
+      return;
+    }
 
-    console.log("Item enviado:", Object.fromEntries(formData.entries()));
-    // Aqui você pode salvar no localStorage ou enviar pro backend
+    try {
+      await createItem(name, parseFloat(price), available, image);
 
-    // Redireciona de volta ao painel admin
-    navigate("/admin");
+      setName("");
+      setPrice("");
+      setAvailable(true);
+      setImage(null);
+    } catch (error) {
+      console.error("Erro ao adicionar item:", error);
+    }
   };
 
   return (
     <div className="min-h-screen bg-white text-black">
-      {/* Header */}
       <div className="bg-[#005C73] text-white pt-27 pb-5 px-6 text-center text-[32px] font-bold">
         Adicionar item ao menu
       </div>

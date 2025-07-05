@@ -6,7 +6,7 @@ import { fetchItems } from "../utils/query";
 import type { Item } from "../utils/definitions";
 
 export default function Menu() {
-  const [itemsQty, setItemsQty] = useState<number>(0);
+  const [itemsQty, setItemsQty] = useState<number>(localStorage.length);
   const [items, setItems] = useState<any[]>([]); // Ajuste o tipo conforme necessário
 
   useEffect(() => {
