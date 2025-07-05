@@ -1,7 +1,7 @@
 import type { Item } from "./definitions";
 
 export async function fetchItems(): Promise<any[]> {
-  const response = await fetch("http://localhost:8000/api/produtos/");
+  const response = await fetch("https://cantina-api.heitor.grupo-02.dependabilidade.ufersa.dev.br/api/produtos/");
   if (!response.ok) {
     throw new Error("Erro ao buscar produtos");
   }
@@ -10,7 +10,7 @@ export async function fetchItems(): Promise<any[]> {
 }
 
 export async function fetchItem(id: number): Promise<Item> {
-  const response = await fetch(`http://localhost:8000/api/produtos/${id}/`);
+  const response = await fetch(`https://cantina-api.heitor.grupo-02.dependabilidade.ufersa.dev.br/api/produtos/${id}/`);
   if (!response.ok) {
     throw new Error("Erro ao buscar produto");
   }
@@ -30,7 +30,7 @@ export async function createItem(
   formData.append("disponivel", String(disponivel));
   formData.append("imagem", imagem);
 
-  const response = await fetch("http://localhost:8000/api/produtos/", {
+  const response = await fetch("https://cantina-api.heitor.grupo-02.dependabilidade.ufersa.dev.br/api/produtos/", {
     method: "POST",
     body: formData,
   });
@@ -41,7 +41,7 @@ export async function createItem(
 }
 
 export async function deleteItem(id: number): Promise<void> {
-  const response = await fetch(`http://localhost:8000/api/produtos/${id}/`, {
+  const response = await fetch(`https://cantina-api.heitor.grupo-02.dependabilidade.ufersa.dev.br/api/produtos/${id}/`, {
     method: "DELETE",
   });
   if (!response.ok) {
@@ -60,7 +60,7 @@ export async function updateItem(item: Item): Promise<Item> {
   }
 
   const response = await fetch(
-    `http://localhost:8000/api/produtos/${item.id}/`,
+    `https://cantina-api.heitor.grupo-02.dependabilidade.ufersa.dev.br/api/produtos/${item.id}/`,
     {
       method: "PUT",
       body: formData,
@@ -73,7 +73,7 @@ export async function updateItem(item: Item): Promise<Item> {
 }
 
 export async function fetchOrders(): Promise<any[]> {
-  const response = await fetch("http://localhost:8000/api/pedidos/");
+  const response = await fetch("https://cantina-api.heitor.grupo-02.dependabilidade.ufersa.dev.br/api/pedidos/");
   if (!response.ok) {
     throw new Error("Erro ao buscar pedidos");
   }
@@ -86,7 +86,7 @@ export async function makeOrder(
   observacao: string,
   itens: number[]
 ): Promise<any> {
-  const response = await fetch("http://localhost:8000/api/pedidos/", {
+  const response = await fetch("https://cantina-api.heitor.grupo-02.dependabilidade.ufersa.dev.br/api/pedidos/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -104,7 +104,7 @@ export async function makeOrder(
 }
 
 export async function deleteOrder(id: number): Promise<void> {
-  const response = await fetch(`http://localhost:8000/api/pedidos/${id}/`, {
+  const response = await fetch(`https://cantina-api.heitor.grupo-02.dependabilidade.ufersa.dev.br/api/pedidos/${id}/`, {
     method: "DELETE",
   });
   if (!response.ok) {

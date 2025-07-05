@@ -36,13 +36,7 @@ export default function EditItemPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const updatedItem = await updateItem(
-        item.id,
-        item.nome,
-        item.preco,
-        item.disponivel,
-        image ?? undefined // Use a imagem nova, se houver
-      );
+      const updatedItem = await updateItem(item);
       console.log("Item atualizado:", updatedItem);
       navigate("/admin");
     } catch (error) {
