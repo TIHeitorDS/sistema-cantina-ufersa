@@ -14,7 +14,4 @@ class PedidoViewSet(viewsets.ModelViewSet):
         by filtering against a `cliente` query parameter in the URL.
         """
         queryset = Pedido.objects.all()
-        cliente_id = self.request.query_params.get('cliente', None)
-        if cliente_id is not None:
-            queryset = queryset.filter(cliente__id=cliente_id)
         return queryset
