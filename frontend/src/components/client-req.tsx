@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Check from "../assets/check.svg";
 import type { Item, Order } from "../utils/definitions";
-import { fetchItem } from "../utils/query";
+import { fetchItem, deleteOrder } from "../utils/query";
 
 export default function ClientReq({ order }: { order: Order }) {
   const [products, setProducts] = useState<Item[]>([]);
@@ -25,7 +25,7 @@ export default function ClientReq({ order }: { order: Order }) {
     };
 
     fetchProducts();
-  }, []);
+  }, [deleteOrder]);
 
   return (
     <div className="bg-[#ffffff] divide-y p-3.5 rounded-lg shadow-md">
@@ -68,6 +68,7 @@ export default function ClientReq({ order }: { order: Order }) {
         <button
           type="button"
           className="bg-orange rounded-[10px] w-9 h-9 flex items-center justify-center"
+          onClick={() => deleteOrder(order.id)}
         >
           <img src={Check} alt="" />
         </button>

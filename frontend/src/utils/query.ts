@@ -50,25 +50,22 @@ export async function deleteItem(id: number): Promise<void> {
   return;
 }
 
-export async function updateItem(
-  id: number,
-  nome: string,
-  preco: number,
-  disponivel: boolean,
-  imagem?: File
-): Promise<Item> {
+export async function updateItem(item: Item): Promise<Item> {
   const formData = new FormData();
-  formData.append("nome", nome);
-  formData.append("preco", preco.toString());
-  formData.append("disponivel", String(disponivel));
-  if (imagem) {
-    formData.append("imagem", imagem);
+  formData.append("nome", item.nome);
+  formData.append("preco", item.preco.toString());
+  formData.append("disponivel", String(item.disponivel));
+  if (item.imagem) {
+    formData.append("imagem", item.imagem);
   }
 
-  const response = await fetch(`http://localhost:8000/api/produtos/${id}/`, {
-    method: "PUT",
-    body: formData,
-  });
+  const response = await fetch(
+    `http://localhost:8000/api/produtos/${item.id}/`,
+    {
+      method: "PUT",
+      body: formData,
+    }
+  );
   if (!response.ok) {
     throw new Error("Erro ao atualizar produto");
   }
@@ -104,4 +101,14 @@ export async function makeOrder(
     throw new Error("Erro ao realizar pedido");
   }
   return await response.json();
+}
+
+export async function deleteOrder(id: number): Promise<void> {
+  const response = await fetch(`http://localhost:8000/api/pedidos/${id}/`, {
+    method: "DELETE",
+  });
+  if (!response.ok) {
+    throw new Error("Erro ao excluir pedido");
+  }
+  return;
 }

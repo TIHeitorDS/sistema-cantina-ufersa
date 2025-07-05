@@ -7,6 +7,8 @@ import { makeOrder } from "../utils/query";
 
 export default function Cart() {
   const [items, setItems] = useState<Item[]>([]);
+  const [name, setName] = useState<string>("");
+  const [observation, setObservation] = useState<string>("");
 
   useEffect(() => {
     const cartItems: Item[] = [];
@@ -31,14 +33,25 @@ export default function Cart() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    if (items.length == 0) {
+      alert("Carrinho vazio! Adicione itens antes de realizar o pedido.");
+      return;
+    }
+
     const formData = new FormData(event.currentTarget as HTMLFormElement);
     const name = formData.get("name") as string;
     const observation = formData.get("observacao") as string;
 
     try {
-      await makeOrder(name, observation, items.map((item) => item.id));
+      await makeOrder(
+        name,
+        observation,
+        items.map((item) => item.id)
+      );
       localStorage.clear();
       setItems([]);
+      setName("");
+      setObservation("");
     } catch (error) {
       console.error("Erro ao realizar pedido:", error);
     }
@@ -76,6 +89,9 @@ export default function Cart() {
             type="text"
             name="name"
             id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
             placeholder="Seu nome completo"
             className="bg-[#ffffff] border border-gray/50 p-[10px] rounded-xl w-full outline-none transition-all focus:ring-1 focus:ring-orange"
           />
@@ -84,6 +100,8 @@ export default function Cart() {
             name="observacao"
             id="observacao"
             placeholder="Observação"
+            value={observation}
+            onChange={(e) => setObservation(e.target.value)}
             className="bg-[#ffffff] border border-gray/50 p-[10px] rounded-xl w-full mt-4 outline-none transition-all focus:ring-1 focus:ring-orange h-[100px] resize-none"
           ></textarea>
 
