@@ -5,3 +5,10 @@ export interface Item {
   imagem: string;
   disponivel: boolean;
 }
+
+export interface Order {
+  id: number;
+  nome_cliente: string;
+  observacao: string;
+  produto: Item[];
+}

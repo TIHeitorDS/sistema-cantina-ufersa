@@ -33,7 +33,7 @@ export default function AdminPage() {
 
         <div className="flex items-center justify-between gap-2">
           <button
-            onClick={() => navigate("add-item")}
+            onClick={() => navigate("/admin/add-item")}
             className="p-2 flex justify-between items-center gap-2 bg-white rounded-lg shadow border border-[#f2f2f2] w-full"
           >
             <span className="font-lato text-[#000000]/25">Adicionar item</span>

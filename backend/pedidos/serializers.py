@@ -4,4 +4,4 @@ from .models import Pedido
 class PedidoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
-        fields = ['id', 'produto', 'nome_cliente', 'obersarvacao']
+        fields = ['id', 'produto', 'nome_cliente', 'observacao']

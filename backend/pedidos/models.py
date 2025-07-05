@@ -5,7 +5,7 @@ from cardapio.models import Produto
 class Pedido(models.Model):
     produto = models.ManyToManyField(Produto, related_name='pedidos', blank=True)
     nome_cliente = models.CharField(max_length=100, blank=True, null=True)
-    obersarvacao = models.TextField(blank=True, null=True)
+    observacao = models.TextField(blank=True, null=True)
 
     def __str__(self):
        return f"Pedido de {self.nome_cliente}"
