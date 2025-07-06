@@ -48,3 +48,8 @@ Como proprietário da cantina,
 quero notificar o usuário quando o pedido estiver pronto,
 
 para que ele saiba quando buscar.
+
+## 8. Gerenciar produtos da cantina (proprietário)
+Como proprietário da cantina, 
+
+quero gerenciar todos os produtos ofertados pela cantina
