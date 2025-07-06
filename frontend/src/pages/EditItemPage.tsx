@@ -36,16 +36,17 @@ export default function EditItemPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      let imagemString = item.imagem;
+      const formData = new FormData();
+      formData.append("id", String(item.id));
+      formData.append("nome", item.nome);
+      formData.append("preco", String(item.preco));
+      formData.append("disponivel", String(item.disponivel));
+
       if (image) {
-        imagemString = await new Promise<string>((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => resolve(reader.result as string);
-          reader.onerror = reject;
-          reader.readAsDataURL(image);
-        });
+        formData.append("imagem", image); // 📸 arquivo mesmo!
       }
-      await updateItem({ ...item, imagem: imagemString });
+
+      await updateItem(formData);
       navigate("/admin");
     } catch (error) {
       console.error("Erro ao atualizar item:", error);
