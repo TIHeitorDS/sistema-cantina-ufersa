@@ -19,7 +19,16 @@ export default function AdminConfig() {
     };
 
     getOrders();
+
+    const interval = setInterval(()=> {
+      getOrders();
+    }, 5000)
+
+    return () => clearInterval(interval);
   }, []);
+
+
+
   return (
     <>
       <div className="bg-[#005C73] text-white pt-27 pb-5 px-6 text-center text-[32px] font-bold flex items-center justify-between">
