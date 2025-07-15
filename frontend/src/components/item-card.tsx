@@ -8,22 +8,20 @@ export default function ItemCard({
   addItemToCart: (item: Item) => void;
 }) {
   return (
-    <div className="bg-[#fff] h-fit shadow rounded-[23px] py-[15px]">
-      <div>
+    <div className="bg-[#fff] h-full flex flex-col justify-between shadow rounded-[23px] py-[15px]">
+      <figure>
         <img
           src={item.imagem}
-          alt="imagem do cachorro-quente"
+          alt={`Imagem de ${item.nome}`}
           className="w-24 h-24 mx-auto object-fill rounded-2xl"
         />
-      </div>
+      </figure>
 
-      <div className="flex flex-col justify-between items-start mt-4 px-3">
-        <div>
-          <p>{item.nome}</p>
-        </div>
+      <div className="px-2 mt-2">
+        <p className="text-balance">{item.nome}</p>
 
-        <div className="flex justify-between items-center w-full mt-2">
-          <p className="font-lato text-gray">R$ {item.preco}</p>
+        <div className="flex justify-between items-center w-full mt-3">
+          <span>R$ {item.preco}</span>
 
           <button
             type="button"
