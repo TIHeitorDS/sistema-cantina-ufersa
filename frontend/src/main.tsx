@@ -5,9 +5,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router";
 import "./App.css";
 import Menu from "./pages/menu.tsx";
 import Cart from "./pages/cart.tsx";
-import AdminPage from "./pages/AdminPage.tsx";
-import AddItemPage from "./pages/AddItemPage.tsx";
-import EditItemPage from "./pages/EditItemPage.tsx";
+import AdminPage from "./pages/AdminMenuItemsPage.tsx";
+import AddItemPage from "./pages/MenuItemCreatePage.tsx";
+import EditItemPage from "./pages/AdminEditMenuItemPage.tsx";
 import AdminConfig from "./pages/admin-config.tsx";
 
 if ("serviceWorker" in navigator) {
