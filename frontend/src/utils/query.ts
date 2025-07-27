@@ -1,7 +1,7 @@
 import type { Item } from "./definitions";
 
 export async function fetchItems(): Promise<any[]> {
-  const response = await fetch("http://localhost:8000/api/produtos/");
+  const response = await fetch("http://54.198.184.178:8000/api/produtos/");
   if (!response.ok) {
     throw new Error("Erro ao buscar produtos");
   }
@@ -10,7 +10,7 @@ export async function fetchItems(): Promise<any[]> {
 }
 
 export async function fetchItem(id: number): Promise<Item> {
-  const response = await fetch(`http://localhost:8000/api/produtos/${id}/`);
+  const response = await fetch(`http://54.198.184.178:8000/api/produtos/${id}/`);
   if (!response.ok) {
     throw new Error("Erro ao buscar produto");
   }
@@ -30,7 +30,7 @@ export async function createItem(
   formData.append("disponivel", String(disponivel));
   formData.append("imagem", imagem);
 
-  const response = await fetch("http://localhost:8000/api/produtos/", {
+  const response = await fetch("http://54.198.184.178:8000/api/produtos/", {
     method: "POST",
     body: formData,
   });
@@ -41,7 +41,7 @@ export async function createItem(
 }
 
 export async function deleteItem(id: number): Promise<void> {
-  const response = await fetch(`http://localhost:8000/api/produtos/${id}/`, {
+  const response = await fetch(`http://54.198.184.178:8000/api/produtos/${id}/`, {
     method: "DELETE",
   });
   if (!response.ok) {
@@ -52,7 +52,7 @@ export async function deleteItem(id: number): Promise<void> {
 
 export async function updateItem(formData: FormData): Promise<Item> {
   const response = await fetch(
-    `http://localhost:8000/api/produtos/${formData.get("id")}/`,
+    `http://54.198.184.178:8000/api/produtos/${formData.get("id")}/`,
     {
       method: "PUT",
       body: formData,
@@ -65,7 +65,7 @@ export async function updateItem(formData: FormData): Promise<Item> {
 }
 
 export async function fetchOrders(): Promise<any[]> {
-  const response = await fetch("http://localhost:8000/api/pedidos/");
+  const response = await fetch("http://54.198.184.178:8000/api/pedidos/");
   if (!response.ok) {
     throw new Error("Erro ao buscar pedidos");
   }
@@ -78,7 +78,7 @@ export async function makeOrder(
   observacao: string,
   itens: number[]
 ): Promise<any> {
-  const response = await fetch("http://localhost:8000/api/pedidos/", {
+  const response = await fetch("http://54.198.184.178:8000/api/pedidos/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -96,7 +96,7 @@ export async function makeOrder(
 }
 
 export async function deleteOrder(id: number): Promise<void> {
-  const response = await fetch(`http://localhost:8000/api/pedidos/${id}/`, {
+  const response = await fetch(`http://54.198.184.178:8000/api/pedidos/${id}/`, {
     method: "DELETE",
   });
   if (!response.ok) {
