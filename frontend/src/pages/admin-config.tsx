@@ -9,25 +9,32 @@ export default function AdminConfig() {
   const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
-    const getOrders = async () => {
+    const fetchInitialOrders = async () => {
       try {
-        const data = await fetchOrders();
-        setOrders(data);
+        const initialOrders = await fetchOrders();
+        setOrders(initialOrders);
       } catch (error) {
-        console.error("Erro ao buscar pedidos:", error);
+        console.error("Error fetching orders:", error);
       }
     };
 
-    getOrders();
-
-    const interval = setInterval(()=> {
-      getOrders();
-    }, 5000)
-
-    return () => clearInterval(interval);
+    fetchInitialOrders();
   }, []);
 
+  useEffect(() => {
+    const websocket = new WebSocket("ws://localhost:8000/ws/pedidos/");
+    websocket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
 
+      if (data.tipo === "NOVO_PEDIDO") {
+        setOrders((prevOrders) => [...prevOrders, data.pedido]);
+      }
+    };
+
+    return () => {
+      websocket.close();
+    };
+  }, []);
 
   return (
     <>
@@ -41,7 +48,7 @@ export default function AdminConfig() {
 
       <div className="grid grid-cols-1 gap-4 mt-5 px-9.25">
         {orders.length > 0 ? (
-          orders.map((order) => <ClientReq key={order.id} order={order} />)
+          orders.map((order) => <ClientReq key={order.id} orders={order} />)
         ) : (
           <p className="text-center text-gray-500">Nenhum pedido encontrado.</p>
         )}

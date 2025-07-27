@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'cardapio',
     'pedidos',
     'clientes',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +60,11 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://celebrated-dango-a9dbad.netlify.app",
+]
+
+CHANNEL_ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
 ]
 
 CRFS_TRUSTED_ORIGINS = ['https://cantina-api.heitor.grupo-02.dependabilidade.ufersa.dev.br']
@@ -82,6 +88,18 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+ASGI_APPLICATION = 'config.asgi.application'
+
+# Channels configuration
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        'CONFIG': {
+            "expiry": 60 * 60,  # 1 hour
+            # "hosts": [("127.0.0.1", 6379)],  # Note a mudança na sintaxe
+        },
+    },
+}
 
 
 # Database

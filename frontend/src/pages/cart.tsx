@@ -41,6 +41,7 @@ export default function Cart() {
     const formData = new FormData(event.currentTarget as HTMLFormElement);
     const name = formData.get("name") as string;
     const observation = formData.get("observacao") as string;
+    
 
     try {
       await makeOrder(
