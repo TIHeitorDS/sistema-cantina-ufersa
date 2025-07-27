@@ -25,7 +25,7 @@ export default function Menu() {
     <div className="h-svh overflow-hidden">
       <Header />
 
-      <div className="mt-6 px-9 grid grid-cols-2 lg:grid-cols-5 mx-auto gap-6 overflow-scroll h-[450px] pb-24">
+      <div className="mt-6 px-9 grid grid-cols-2 lg:grid-cols-5 mx-auto gap-4 overflow-scroll min-h-fit max-h-[450px] pb-24">
         {items.map(
           (item) =>
             item.disponivel && (
