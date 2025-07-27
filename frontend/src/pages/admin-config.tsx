@@ -22,7 +22,7 @@ export default function AdminConfig() {
   }, []);
 
   useEffect(() => {
-    const websocket = new WebSocket("ws://localhost:8000/ws/pedidos/");
+    const websocket = new WebSocket("ws://54.198.184.178:8000/ws/pedidos/");
     websocket.onmessage = (event) => {
       const data = JSON.parse(event.data);
 
