@@ -25,14 +25,14 @@ export const items: Item[] = [
   {
     id: 4,
     nome: "Refrigerante",
-    imagem: "/refrigerante.jpg",
+    imagem: "/coca.png",
     preco: "4.00",
     disponivel: true,
   },
   {
     id: 5,
     nome: "Salada",
-    imagem: "/salada.jpg",
+    imagem: "/salada.jpeg",
     preco: "7.00",
     disponivel: true,
   },
