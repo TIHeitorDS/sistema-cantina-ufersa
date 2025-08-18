@@ -11,16 +11,7 @@ export default function Navigation() {
   let location = useLocation();
   let navigate = useNavigate();
 
-  const paths = [
-    "/",
-    "/notifications",
-    "/cart",
-    "/list",
-    "/profile",
-  ];
-
-  console.log(location.pathname);
-  
+  const paths = ["/", "/notifications", "/cart", "/list", "/profile"];
 
   const icons = [
     <MenuIcon isActive={location.pathname === paths[0]} />,
