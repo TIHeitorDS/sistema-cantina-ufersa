@@ -1,7 +1,8 @@
 import type { Item } from "../utils/definitions";
 import { useLocation } from "react-router";
-import plusIcon from "../assets/plus.svg"
-import minosIcon from  "../assets/minus.svg";
+import plusIcon from "../assets/plus.svg";
+import minosIcon from "../assets/minus.svg";
+import xIcon from "../assets/x.svg";
 
 export default function ItemCard({
   item,
@@ -11,29 +12,44 @@ export default function ItemCard({
   onHandleCart: (item: Item) => void;
 }) {
   let { pathname } = useLocation();
+  let icon;
+
+  switch (pathname) {
+    case "/":
+      icon = plusIcon;
+      break;
+    case "/cart":
+      icon = minosIcon;
+      break;
+    case "/list":
+      icon = xIcon;
+      break;
+    default:
+      icon = plusIcon; // fallback
+  }
 
   return (
-    <div className="bg-[#F9F9F9] flex flex-col max-h-fit justify-between rounded-[23px] py-3.75 px-4.5">
-      <figure className="h-36.25 w-full mx-auto rounded-2xl overflow-hidden">
+    <div className="flex max-h-fit flex-col justify-between rounded-[23px] bg-[#F9F9F9] px-4.5 py-3.75">
+      <figure className="mx-auto h-36.25 w-full overflow-hidden rounded-2xl">
         <img
           src={item.imagem}
           alt={`Imagem de ${item.nome}`}
-          className="w-full h-full object-cover object-center"
+          className="h-full w-full object-cover object-center"
         />
       </figure>
 
-      <div className="px-2 mt-2">
+      <div className="mt-2 px-2">
         <p className="truncate text-xl">{item.nome}</p>
 
-        <div className="flex font-lato justify-between items-center w-full mt-2.5">
+        <div className="font-lato mt-2.5 flex w-full items-center justify-between">
           <span className="text-lg">R$ {item.preco}</span>
 
           <button
             type="button"
-            className="bg-orange flex justify-center items-center w-10 h-10 rounded-[10px]"
+            className="bg-orange flex h-10 w-10 items-center justify-center rounded-[10px]"
             onClick={() => onHandleCart(item)}
           >
-            <img src={pathname === "/" ? plusIcon : minosIcon} alt="imagem de adição" />
+            <img src={icon} alt="imagem de adição" />
           </button>
         </div>
       </div>

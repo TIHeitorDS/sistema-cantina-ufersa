@@ -12,8 +12,8 @@ import UserProvider from "./context/user-context.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <CartProvider>
-      <UserProvider>
+    <UserProvider>
+      <CartProvider>
         <Router>
           <Routes>
             <Route path="/cart" element={<Cart />} />
@@ -27,7 +27,7 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/admin/edit-item/:id" element={<EditItemPage />} /> */}
           </Routes>
         </Router>
-      </UserProvider>
-    </CartProvider>
+      </CartProvider>
+    </UserProvider>
   </StrictMode>,
 );

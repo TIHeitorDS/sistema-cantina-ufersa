@@ -6,6 +6,7 @@ type CartContextType = {
   showPopup: { id: number; text: string }[];
   addItemToCart: (item: Item) => void;
   removeItemFromCart: (item: Item) => void;
+  removeAllItemsFromCart: () => void;
 };
 
 export const CartContext = createContext<CartContextType>({
@@ -13,6 +14,7 @@ export const CartContext = createContext<CartContextType>({
   showPopup: [],
   addItemToCart: () => {},
   removeItemFromCart: () => {},
+  removeAllItemsFromCart: () => {},
 });
 
 export default function CartProvider({
@@ -50,10 +52,15 @@ export default function CartProvider({
     );
   };
 
+  const removeAllItemsFromCart = () => {
+    setCart([]);
+  };
+
   const value = useMemo(
     () => ({
       cart,
       showPopup,
+      removeAllItemsFromCart,
       addItemToCart,
       removeItemFromCart,
     }),

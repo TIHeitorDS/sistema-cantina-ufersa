@@ -1,6 +1,7 @@
 export interface User {
   nome: string | undefined;
   telefone: string | undefined;
+  orders: Item[];
 }
 
 export interface Item {
@@ -14,7 +15,7 @@ export interface Item {
 export interface Order {
   id: number;
   nomeCliente: string;
-  produto: Item[];
+  pedidos: Item[];
 }
 
 export interface CurrentOrder {
