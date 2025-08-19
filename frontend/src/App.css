@@ -7,4 +7,26 @@
   --color-blue: #004e64;
   --color-orange: #ff6b00;
   --color-gray: #5a5a5a;
+  --animate-show-popup: showThenHide 2s ease forwards;
+}
+
+@keyframes showThenHide {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1);
+  } /* fim do show */
+  70% {
+    opacity: 1;
+
+    transform: scale(1);
+  } /* mantém visível */
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+    visibility: hidden;
+  } /* hidden */
 }
