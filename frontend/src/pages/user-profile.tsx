@@ -15,7 +15,7 @@ export default function UserProfile() {
   const [isDisabled, setIsDisabled] = useState<boolean>(user !== null);
 
   const handleSave = () => {
-    setUser({ ...user, nome: nameValue, telefone: phoneValue });
+    setUser({ ...user, nome: nameValue, telefone: phoneValue, orders: user?.orders ?? [] });
     setIsDisabled(true);
   };
 
