@@ -1,9 +1,12 @@
 import { useCart } from "../shared/hooks/useCart";
+import { useUser } from "../shared/hooks/useUser";
 import AppLayout from "../ui/app-layout";
 import ItemCard from "../components/item-card";
+import clsx from "clsx";
 
 export default function Cart() {
-  const { cart, removeItemFromCart } = useCart();
+  const { cart, removeItemFromCart, removeAllItemsFromCart } = useCart();
+  const { user, addItemToOrder } = useUser();
 
   return (
     <AppLayout title="Carrinho de compras">
@@ -22,7 +25,22 @@ export default function Cart() {
           <div className="p-8">
             <button
               type="button"
-              className="bg-orange h-fit w-full rounded-[23px] py-2.75 text-xl text-white"
+              className={clsx(
+                "bg-orange h-fit w-full rounded-[23px] py-2.75 text-xl text-white",
+                !user && "disabled:opacity-50",
+              )}
+              disabled={!user}
+              onClick={() => {
+                if (user) {
+                  const confirm = window.confirm(
+                    "Do you want to place the order?",
+                  );
+                  if (confirm) {
+                    cart.forEach((item) => addItemToOrder(item));
+                    removeAllItemsFromCart();
+                  }
+                }
+              }}
             >
               Realizar pedido
             </button>
