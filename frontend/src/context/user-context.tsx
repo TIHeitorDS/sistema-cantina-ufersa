@@ -23,9 +23,10 @@ export default function UserProvider({
   const [user, setUser] = useState<User | null>(null);
 
   const addItemToOrder = (item: Item) => {
-    if (user) {
-      setUser({ ...user, orders: [...(user.orders || []), item] });
-    }
+    setUser((prev) => {
+      if (!prev) return prev; // caso não tenha usuário ainda
+      return { ...prev, orders: [...(prev.orders || []), item] };
+    });
   };
 
   const removeItemFromOrder = (item: Item) => {

@@ -39,14 +39,15 @@ export default function Menu() {
 
         <div className="mx-auto mt-6 grid grid-cols-2 gap-4 lg:grid-cols-5">
           {filteredItems.length > 0 ? (
-            filteredItems.map((item) =>
-              item.disponivel && (
-                <ItemCard
-                  key={item.id}
-                  item={item}
-                  onHandleCart={addItemToCart}
-                />
-              ),
+            filteredItems.map(
+              (item) =>
+                item.disponivel && (
+                  <ItemCard
+                    key={item.id}
+                    item={item}
+                    onHandleCart={addItemToCart}
+                  />
+                ),
             )
           ) : (
             <div className="col-span-2 text-center">
@@ -56,11 +57,9 @@ export default function Menu() {
         </div>
       </AppLayout>
 
-      <div className="absolute bottom-24 left-1/2 w-4/5 -translate-x-1/2 space-y-3">
-        {showPopup.map((popup) => (
-          <SucessPopup key={popup.id} text={popup.text} />
-        ))}
-      </div>
+      {showPopup.map((popup) => (
+        <SucessPopup key={popup.id} text={popup.text} />
+      ))}
     </>
   );
 }
