@@ -24,22 +24,19 @@ export default function UserProvider({
 
   const addItemToOrder = (item: Item) => {
     setUser((prev) => {
-      if (!prev) return prev; // caso não tenha usuário ainda
+      if (!prev) return prev;
       return { ...prev, orders: [...(prev.orders || []), item] };
     });
   };
 
   const removeItemFromOrder = (item: Item) => {
-    const response = confirm(
-      "Do you want to remove this item from your order?",
-    );
-
-    if (response && user) {
-      setUser({
-        ...user,
-        orders: user.orders.filter((order) => order.id !== item.id),
-      });
-    }
+    setUser((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        orders: (prev.orders ?? []).filter((order) => order.id !== item.id),
+      };
+    });
   };
 
   return (
