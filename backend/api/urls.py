@@ -1,10 +1,9 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import PedidoViewSet
+from .views import ItemViewSet
 
-# Create a router and register our viewset with it.
 router = DefaultRouter()
-router.register(r'pedidos', PedidoViewSet) 
+router.register(r'items', ItemViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
