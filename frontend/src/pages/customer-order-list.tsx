@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useUser } from "../shared/hooks/useUser";
+import { useCustomer } from "../shared/hooks/useCustomer";
 import ItemCard from "../components/item-card";
 import AppLayout from "../ui/app-layout";
 import ConfirmDialog from "../ui/confirm-dialog";
 import type { Item } from "../utils/definitions";
 
 export default function UserOrderList() {
-  const { user, removeItemFromOrder } = useUser();
+  const { customer: user, removeItemFromOrder } = useCustomer();
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
 

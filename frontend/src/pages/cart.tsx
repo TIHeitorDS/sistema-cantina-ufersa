@@ -1,6 +1,6 @@
 import type { Item } from "../utils/definitions";
 import { useCart } from "../shared/hooks/useCart";
-import { useUser } from "../shared/hooks/useUser";
+import { useCustomer } from "../shared/hooks/useCustomer";
 import { useState } from "react";
 import AppLayout from "../ui/app-layout";
 import ItemCard from "../components/item-card";
@@ -10,7 +10,7 @@ import SucessPopup from "../ui/sucess-popup";
 
 export default function Cart() {
   const { cart, removeItemFromCart, removeAllItemsFromCart } = useCart();
-  const { user, addItemToOrder } = useUser();
+  const { customer: user, addItemToOrder } = useCustomer();
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 

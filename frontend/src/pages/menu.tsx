@@ -16,7 +16,7 @@ export default function Menu() {
   };
 
   const filteredItems = items.filter((item) =>
-    item.nome.toLowerCase().includes(value.toLowerCase()),
+    item.name.toLowerCase().includes(value.toLowerCase()),
   );
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function Menu() {
           {filteredItems.length > 0 ? (
             filteredItems.map(
               (item) =>
-                item.disponivel && (
+                item.isAvailable && (
                   <ItemCard
                     key={item.id}
                     item={item}

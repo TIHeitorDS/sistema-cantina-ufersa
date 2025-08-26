@@ -1,15 +1,15 @@
-export interface User {
-  nome: string | undefined;
-  telefone: string | undefined;
-  orders: Item[];
+export interface Customer {
+  id?: number;
+  name: string | undefined;
+  phone: string | undefined;
 }
 
 export interface Item {
   id: number; // Optional for new items
-  nome: string;
-  preco: string;
-  imagem: string;
-  disponivel: boolean;
+  name: string;
+  price: string;
+  image: string;
+  isAvailable: boolean;
 }
 
 export interface Order {

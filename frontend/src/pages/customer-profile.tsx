@@ -1,5 +1,7 @@
-import { useUser } from "../shared/hooks/useUser";
-import { useState } from "react";
+import type { Customer } from "../utils/definitions";
+import { useCustomer } from "../shared/hooks/useCustomer";
+import { useEffect, useState } from "react";
+import { createCustomer, getCustomer } from "../utils/query";
 import AppLayout from "../ui/app-layout";
 import UserBtn from "../components/user-btn";
 import saveIcon from "../assets/save.svg";
@@ -7,21 +9,45 @@ import editIcon from "../assets/user-edit.svg";
 import profileIcon from "../assets/profile.svg";
 
 export default function UserProfile() {
-  const { user, setUser } = useUser();
-  const [nameValue, setNameValue] = useState<string | undefined>(user?.nome);
-  const [phoneValue, setPhoneValue] = useState<string | undefined>(
-    user?.telefone,
+  const { customer, setCustomer } = useCustomer();
+  const [nameValue, setNameValue] = useState<string | undefined>(
+    customer?.name,
   );
-  const [isDisabled, setIsDisabled] = useState<boolean>(user !== null);
+  const [phoneValue, setPhoneValue] = useState<string | undefined>(
+    customer?.phone,
+  );
+  const [isDisabled, setIsDisabled] = useState<boolean>(customer !== null);
 
-  const handleSave = () => {
-    setUser({ ...user, nome: nameValue, telefone: phoneValue, orders: user?.orders ?? [] });
-    setIsDisabled(true);
+  const handleSave = async () => {
+    const newCustomer: Customer = {
+      name: nameValue,
+      phone: phoneValue,
+    };
+
+    const savedCustomer = await createCustomer(newCustomer);
+
+    if (savedCustomer) {
+      setCustomer(savedCustomer);
+      localStorage.setItem("id", String(savedCustomer.id));
+      setIsDisabled(true);
+    }
   };
 
   const handleEdit = () => {
     setIsDisabled(false);
   };
+
+  useEffect(() => {
+    const fetchCustomer = async () => {
+      const customerID = localStorage.getItem("id");
+      if (customerID) {
+        const data = await getCustomer(Number(customerID));
+        setCustomer(data);
+      }
+    };
+
+    fetchCustomer();
+  }, []);
 
   return (
     <AppLayout title="Meu perfil">

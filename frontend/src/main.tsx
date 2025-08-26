@@ -5,10 +5,10 @@ import "./App.css";
 import Menu from "./pages/menu.tsx";
 import Notification from "./pages/notification.tsx";
 import Cart from "./pages/cart.tsx";
-import UserOrderList from "./pages/user-order-list.tsx";
-import UserProfile from "./pages/user-profile.tsx";
+import UserOrderList from "./pages/customer-order-list.tsx";
+import UserProfile from "./pages/customer-profile.tsx";
 import CartProvider from "./context/cart-context.tsx";
-import UserProvider from "./context/user-context.tsx";
+import UserProvider from "./context/customer-context.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

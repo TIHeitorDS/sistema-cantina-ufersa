@@ -53,17 +53,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
+CORS_ALLOW_ALL_ORIGINS = True
+
+CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
-    "http://celebrated-dango-a9dbad.netlify.app",
+    "http://127.0.0.1:5173"
 ]
-
-CHANNEL_ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-]
-
-CRFS_TRUSTED_ORIGINS = ['https://cantina-api.heitor.grupo-02.dependabilidade.ufersa.dev.br']
 
 ROOT_URLCONF = 'config.urls'
 
@@ -85,21 +80,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
-
-# Channels configuration
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
-        'CONFIG': {
-            "expiry": 60 * 60,  # 1 hour
-            # "hosts": [("127.0.0.1", 6379)],  # Note a mudança na sintaxe
-        },
-    },
-}
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
