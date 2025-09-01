@@ -1,4 +1,4 @@
-import type { Order } from "../utils/definitions";
+import type { Order } from "../shared/types/definitions";
 
 export default function ClientReq({ orders }: { orders: Order }) {
   return (

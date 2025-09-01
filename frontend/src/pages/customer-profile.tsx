@@ -1,4 +1,4 @@
-import type { Customer } from "../utils/definitions";
+import type { Customer } from "../shared/types/definitions";
 import { useCustomer } from "../shared/hooks/useCustomer";
 import { useEffect, useState } from "react";
 import { createCustomer, getCustomer } from "../utils/query";

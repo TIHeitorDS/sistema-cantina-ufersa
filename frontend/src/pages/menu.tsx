@@ -1,12 +1,13 @@
-import type { Product } from "../utils/definitions";
+import { useProductsData } from "../shared/hooks/useProductData";
+import type { Product } from "../shared/types/definitions";
 import { useEffect, useState } from "react";
-import { getProducts } from "../utils/seed/products";
 import { useCart } from "../shared/hooks/useCart";
 import ItemCard from "../components/item-card";
 import AppLayout from "../ui/app-layout";
 import SucessPopup from "../ui/sucess-popup";
 
 export default function Menu() {
+  const { data } = useProductsData();
   const { addItemToCart, showPopup } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [inputValue, setInputValue] = useState("");
@@ -20,8 +21,8 @@ export default function Menu() {
   );
 
   useEffect(() => {
-    getProducts().then(setProducts);
-  }, []);
+    if (data) setProducts(data);
+  }, [data]);
 
   return (
     <>

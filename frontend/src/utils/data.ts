@@ -1,3 +1,3 @@
-import { type Product } from "./definitions";
+import { type Product } from "../shared/types/definitions";
 
 export const items: Product[] = [];

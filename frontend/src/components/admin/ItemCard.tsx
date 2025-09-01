@@ -1,4 +1,4 @@
-import type { Product } from "../../utils/definitions";
+import type { Product } from "../../shared/types/definitions";
 import { useNavigate } from "react-router";
 import pencil from "../../assets/pencil.svg";
 

@@ -1,4 +1,4 @@
-import type { Product } from "../utils/definitions";
+import type { Product } from "../shared/types/definitions";
 import { useLocation } from "react-router";
 import plusIcon from "../assets/plus.svg";
 import minosIcon from "../assets/minus.svg";

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import ItemCard from "../components/admin/ItemCard";
 import BackButton from "../components/back-button";
-import type { Product } from "../utils/definitions";
+import type { Product } from "../shared/types/definitions";
 import { useEffect, useState } from "react";
 import { fetchItems } from "../utils/query";
 

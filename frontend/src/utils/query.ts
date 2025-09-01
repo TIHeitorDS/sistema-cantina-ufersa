@@ -1,4 +1,4 @@
-import type { Customer } from "./definitions";
+import type { Customer } from "../shared/types/definitions";
 
 export async function getCustomer(id: number): Promise<Customer | null> {
   try {

@@ -1,5 +1,5 @@
 import minus from "../assets/minus.svg";
-import type { Product } from "../utils/definitions";
+import type { Product } from "../shared/types/definitions";
 
 export default function MyItemCart({
   items,

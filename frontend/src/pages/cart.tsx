@@ -1,4 +1,4 @@
-import type { Product } from "../utils/definitions";
+import type { Product } from "../shared/types/definitions";
 import { useCart } from "../shared/hooks/useCart";
 import { useCustomer } from "../shared/hooks/useCustomer";
 import { useState } from "react";

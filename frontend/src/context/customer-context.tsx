@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import type { Customer } from "../utils/definitions";
+import type { Customer } from "../shared/types/definitions";
 
 interface CustomerContextType {
   customer: Customer | null;
