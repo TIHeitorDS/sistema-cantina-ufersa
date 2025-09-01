@@ -3,12 +3,12 @@ import { useCustomer } from "../shared/hooks/useCustomer";
 import ItemCard from "../components/item-card";
 import AppLayout from "../ui/app-layout";
 import ConfirmDialog from "../ui/confirm-dialog";
-import type { Item } from "../utils/definitions";
+import type { Product } from "../utils/definitions";
 
 export default function UserOrderList() {
   const { customer: user, removeItemFromOrder } = useCustomer();
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const [selectedItem, setSelectedItem] = useState<Product | null>(null);
 
   const handleRemoveItem = () => {
     if (!selectedItem) return;

@@ -1,4 +1,4 @@
-import type { Item } from "../utils/definitions";
+import type { Product } from "../utils/definitions";
 import { useCart } from "../shared/hooks/useCart";
 import { useCustomer } from "../shared/hooks/useCustomer";
 import { useState } from "react";
@@ -14,7 +14,7 @@ export default function Cart() {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
-  const onHandleOrder = (cart: Item[]) => {
+  const onHandleOrder = (cart: Product[]) => {
     cart.forEach((item) => {
       addItemToOrder(item);
     });

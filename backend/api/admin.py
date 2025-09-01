@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Item, Customer, Order, OrderItem
+from .models import Product, Customer, Order, OrderProduct
 
-@admin.register(Item)
-class ItemAdmin(admin.ModelAdmin):
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'price', 'image', 'isAvailable')
     list_filter = ('isAvailable',)
     search_fields = ('name',)
@@ -14,10 +14,10 @@ class CustomerAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'customer')
-    list_filter = ('created_at',)
+    list_display = ('id', 'customer',)
+    list_filter = ('created_at', 'updated_at')
 
-@admin.register(OrderItem)
-class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ('id', 'order', 'item', 'quantity')
-    list_filter = ('order',)
+@admin.register(OrderProduct)
+class OrderProductAdmin(admin.ModelAdmin):
+    list_display = ('id', 'order', 'product', 'quantity')
+    list_filter = ('order', 'product')

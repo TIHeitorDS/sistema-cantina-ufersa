@@ -1,6 +1,6 @@
-import type { Item, Customer } from "./definitions";
+import type { Product, Customer } from "./definitions";
 
-export async function getItems(): Promise<Item[]> {
+export async function getProducts(): Promise<Product[]> {
   try {
     const response = await fetch("http://localhost:8000/api/items/");
 
@@ -8,7 +8,7 @@ export async function getItems(): Promise<Item[]> {
       throw new Error(`Erro ao buscar itens: ${response.statusText}`);
     }
 
-    const data: Item[] = await response.json();
+    const data: Product[] = await response.json();
     return data;
   } catch (error) {
     console.error(error);

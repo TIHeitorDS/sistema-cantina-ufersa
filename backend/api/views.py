@@ -1,10 +1,10 @@
 from rest_framework import viewsets
-from .models import Item, Customer, Order, OrderItem
-from .serializers import ItemSerializers, CustomerSerializers, OrderSerializers, OrderItemSerializers
+from .models import Product, Customer, Order, OrderProduct
+from .serializers import ProductSerializers, CustomerSerializers, OrderSerializers, OrderProductSerializers
 
-class ItemViewSet(viewsets.ModelViewSet):
-    queryset = Item.objects.all()
-    serializer_class = ItemSerializers
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializers
 
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
@@ -14,6 +14,6 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializers
 
-class OrderItemViewSet(viewsets.ModelViewSet):
-    queryset = OrderItem.objects.all()
-    serializer_class = OrderItemSerializers
+class OrderProductViewSet(viewsets.ModelViewSet):
+    queryset = OrderProduct.objects.all()
+    serializer_class = OrderProductSerializers

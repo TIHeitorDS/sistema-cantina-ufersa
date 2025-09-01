@@ -1,13 +1,13 @@
-import type { Item } from "../utils/definitions";
+import type { Product } from "../utils/definitions";
 import { useEffect, useState } from "react";
-import { getItems } from "../utils/query";
+import { getProducts } from "../utils/query";
 import { useCart } from "../shared/hooks/useCart";
 import ItemCard from "../components/item-card";
 import AppLayout from "../ui/app-layout";
 import SucessPopup from "../ui/sucess-popup";
 
 export default function Menu() {
-  const [items, setItems] = useState<Item[]>([]);
+  const [items, setItems] = useState<Product[]>([]);
   const { addItemToCart, showPopup } = useCart();
   const [value, setValue] = useState("");
 
@@ -20,7 +20,7 @@ export default function Menu() {
   );
 
   useEffect(() => {
-    getItems().then(setItems);
+    getProducts().then(setItems);
   }, []);
 
   return (

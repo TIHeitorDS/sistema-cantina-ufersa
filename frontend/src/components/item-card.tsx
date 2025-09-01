@@ -1,4 +1,4 @@
-import type { Item } from "../utils/definitions";
+import type { Product } from "../utils/definitions";
 import { useLocation } from "react-router";
 import plusIcon from "../assets/plus.svg";
 import minosIcon from "../assets/minus.svg";
@@ -8,8 +8,8 @@ export default function ItemCard({
   item,
   onHandleCart,
 }: {
-  item: Item;
-  onHandleCart: (item: Item) => void;
+  item: Product;
+  onHandleCart: (item: Product) => void;
 }) {
   let { pathname } = useLocation();
   let icon;

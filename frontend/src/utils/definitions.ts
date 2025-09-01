@@ -4,7 +4,7 @@ export interface Customer {
   phone: string | undefined;
 }
 
-export interface Item {
+export interface Product {
   id: number; // Optional for new items
   name: string;
   price: string;
@@ -15,7 +15,7 @@ export interface Item {
 export interface Order {
   id: number;
   nomeCliente: string;
-  pedidos: Item[];
+  pedidos: Product[];
 }
 
 export interface CurrentOrder {

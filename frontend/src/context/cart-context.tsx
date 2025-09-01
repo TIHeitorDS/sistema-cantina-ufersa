@@ -1,11 +1,11 @@
 import { createContext, useState, useMemo } from "react";
-import type { Item } from "../utils/definitions";
+import type { Product } from "../utils/definitions";
 
 type CartContextType = {
-  cart: Item[];
+  cart: Product[];
   showPopup: { id: number; text: string }[];
-  addItemToCart: (item: Item) => void;
-  removeItemFromCart: (item: Item) => void;
+  addItemToCart: (item: Product) => void;
+  removeItemFromCart: (item: Product) => void;
   removeAllItemsFromCart: () => void;
 };
 
@@ -22,7 +22,7 @@ export default function CartProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [cart, setCart] = useState<Item[]>([]);
+  const [cart, setCart] = useState<Product[]>([]);
 
   const [showPopup, setShowPopup] = useState<{ id: number; text: string }[]>(
     [],
@@ -41,12 +41,12 @@ export default function CartProvider({
     }, 2000);
   };
 
-  const addItemToCart = (item: Item) => {
+  const addItemToCart = (item: Product) => {
     setCart((prevCart) => [...prevCart, item]);
     handleShowPopup();
   };
 
-  const removeItemFromCart = (item: Item) => {
+  const removeItemFromCart = (item: Product) => {
     setCart((prevCart) =>
       prevCart.filter((cartItem) => cartItem.id !== item.id),
     );

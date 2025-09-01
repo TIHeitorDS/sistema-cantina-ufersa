@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from .models import Item, Customer, Order, OrderItem
+from .models import Product, Customer, Order, OrderProduct
 
-class ItemSerializers(serializers.ModelSerializer):
+class ProductSerializers(serializers.ModelSerializer):
     class Meta:
-        model = Item
+        model = Product
         fields = '__all__'
         
 class CustomerSerializers(serializers.ModelSerializer):
@@ -16,7 +16,7 @@ class OrderSerializers(serializers.ModelSerializer):
         model = Order
         fields = '__all__'
 
-class OrderItemSerializers(serializers.ModelSerializer):
+class OrderProductSerializers(serializers.ModelSerializer):
     class Meta:
-        model: OrderItem
+        model = OrderProduct
         fields = '__all__'

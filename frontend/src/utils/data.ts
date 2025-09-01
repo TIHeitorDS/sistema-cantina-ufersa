@@ -1,3 +1,3 @@
-import { type Item } from "./definitions";
+import { type Product } from "./definitions";
 
-export const items: Item[] = [];
+export const items: Product[] = [];
