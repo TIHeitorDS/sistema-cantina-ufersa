@@ -8,7 +8,7 @@ import SucessPopup from "../ui/sucess-popup";
 
 export default function Menu() {
   const { data } = useProductsData();
-  const { addItemToCart, showPopup } = useCart();
+  const { addItemToCart, addedToCart } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [inputValue, setInputValue] = useState("");
 
@@ -64,8 +64,11 @@ export default function Menu() {
         </div>
       </AppLayout>
 
-      {showPopup.map((popup) => (
-        <SucessPopup key={popup.id} text={popup.text} />
+      {addedToCart.map((cartSuccessMessage) => (
+        <SucessPopup
+          key={cartSuccessMessage.id}
+          text={cartSuccessMessage.text}
+        />
       ))}
     </>
   );
