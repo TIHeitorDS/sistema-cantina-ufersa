@@ -1,20 +1,4 @@
-import type { Product, Customer } from "./definitions";
-
-export async function getProducts(): Promise<Product[]> {
-  try {
-    const response = await fetch("http://localhost:8000/api/items/");
-
-    if (!response.ok) {
-      throw new Error(`Erro ao buscar itens: ${response.statusText}`);
-    }
-
-    const data: Product[] = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
-}
+import type { Customer } from "./definitions";
 
 export async function getCustomer(id: number): Promise<Customer | null> {
   try {
