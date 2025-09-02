@@ -3,14 +3,14 @@ import type { Product } from "../shared/types/definitions";
 
 type CartContextType = {
   cart: Product[];
-  addItemToCart: (item: Product) => void;
+  handleAddProduct: (item: Product) => void;
   removeItemFromCart: (item: Product) => void;
   removeAllItemsFromCart: () => void;
 };
 
 export const CartContext = createContext<CartContextType>({
   cart: [],
-  addItemToCart: () => {},
+  handleAddProduct: () => {},
   removeItemFromCart: () => {},
   removeAllItemsFromCart: () => {},
 });
@@ -22,8 +22,20 @@ export default function CartProvider({
 }) {
   const [cart, setCart] = useState<Product[]>([]);
 
-  const addItemToCart = (item: Product) => {
-    setCart((prevCart) => [...prevCart, item]);
+  const handleAddProduct = (product: Product) => {
+    setCart((prevCart) => {
+      const isProductInCart = prevCart.find((item) => item.id === product.id);
+
+      if (isProductInCart) {
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantityInCart: item.quantityInCart + 1 }
+            : item,
+        );
+      }
+
+      return [...prevCart, { ...product, quantityInCart: 1 }];
+    });
   };
 
   const removeItemFromCart = (item: Product) => {
@@ -40,7 +52,7 @@ export default function CartProvider({
     () => ({
       cart,
       removeAllItemsFromCart,
-      addItemToCart,
+      handleAddProduct,
       removeItemFromCart,
     }),
     [cart],

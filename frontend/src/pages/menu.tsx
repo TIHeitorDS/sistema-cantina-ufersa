@@ -7,7 +7,7 @@ import AppLayout from "../ui/app-layout";
 
 export default function Menu() {
   const { data } = useProductsData();
-  const { addItemToCart } = useCart();
+  const { handleAddProduct } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [inputValue, setInputValue] = useState("");
 
@@ -51,7 +51,7 @@ export default function Menu() {
                   <ItemCard
                     key={item.id}
                     item={item}
-                    onHandleCart={addItemToCart}
+                    onHandleCart={handleAddProduct}
                   />
                 ),
             )

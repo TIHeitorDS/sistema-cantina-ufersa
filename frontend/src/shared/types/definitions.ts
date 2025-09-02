@@ -10,6 +10,7 @@ export interface Product {
   price: string;
   image: string;
   isAvailable: boolean;
+  quantityInCart: number;
 }
 
 export interface Order {
