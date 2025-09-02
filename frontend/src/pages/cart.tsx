@@ -2,13 +2,12 @@ import { useCart } from "../shared/hooks/useCart";
 import { useCustomer } from "../shared/hooks/useCustomer";
 import { useState } from "react";
 import AppLayout from "../ui/app-layout";
-import ItemCard from "../components/item-card";
 import clsx from "clsx";
 import ConfirmDialog from "../ui/confirm-dialog";
 import CartCard from "../components/cart-card";
 
 export default function Cart() {
-  const { cart, removeItemFromCart, removeAllItemsFromCart } = useCart();
+  const { cart, handleRemoveProduct, removeAllItemsFromCart } = useCart();
   const { customer: user } = useCustomer();
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
@@ -27,7 +26,7 @@ export default function Cart() {
                 <CartCard
                   key={item.id}
                   product={item}
-                  onHandleCart={removeItemFromCart}
+                  onHandleCart={handleRemoveProduct}
                 />
               ))}
             </div>
