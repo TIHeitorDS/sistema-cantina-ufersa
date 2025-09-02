@@ -1,4 +1,4 @@
-import type { Item } from "../utils/definitions";
+import type { Product } from "../shared/types/definitions";
 import { useLocation } from "react-router";
 import plusIcon from "../assets/plus.svg";
 import minosIcon from "../assets/minus.svg";
@@ -8,8 +8,8 @@ export default function ItemCard({
   item,
   onHandleCart,
 }: {
-  item: Item;
-  onHandleCart: (item: Item) => void;
+  item: Product;
+  onHandleCart: (item: Product) => void;
 }) {
   let { pathname } = useLocation();
   let icon;
@@ -32,17 +32,17 @@ export default function ItemCard({
     <div className="flex max-h-fit flex-col justify-between rounded-[23px] bg-[#F9F9F9] px-4.5 py-3.75">
       <figure className="mx-auto h-36.25 w-full overflow-hidden rounded-2xl">
         <img
-          src={item.imagem}
-          alt={`Imagem de ${item.nome}`}
+          src={item.image}
+          alt={`Imagem de ${item.name}`}
           className="h-full w-full object-cover object-center"
         />
       </figure>
 
       <div className="mt-2 px-2">
-        <p className="truncate text-xl">{item.nome}</p>
+        <p className="truncate text-xl">{item.name}</p>
 
         <div className="font-lato mt-2.5 flex w-full items-center justify-between">
-          <span className="text-lg">R$ {item.preco}</span>
+          <span className="text-lg">R$ {item.price}</span>
 
           <button
             type="button"

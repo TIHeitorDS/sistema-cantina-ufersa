@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { fetchOrders } from "../utils/query";
 import Bolt from "../assets/bolt.svg";
 import ClientReq from "../components/client-req";
-import type { Order } from "../utils/definitions";
+import type { Order } from "../shared/types/definitions";
 
 export default function AdminConfig() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -38,7 +38,7 @@ export default function AdminConfig() {
 
   return (
     <>
-      <div className="bg-[#005C73] text-white pt-27 pb-5 px-6 text-center text-[32px] font-bold flex items-center justify-between">
+      <div className="flex items-center justify-between bg-[#005C73] px-6 pt-27 pb-5 text-center text-[32px] font-bold text-white">
         <p className="grow">Lista de pedidos</p>
 
         <Link to="/admin/config">
@@ -46,7 +46,7 @@ export default function AdminConfig() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 mt-5 px-9.25">
+      <div className="mt-5 grid grid-cols-1 gap-4 px-9.25">
         {orders.length > 0 ? (
           orders.map((order) => <ClientReq key={order.id} orders={order} />)
         ) : (

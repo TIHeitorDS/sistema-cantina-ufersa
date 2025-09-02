@@ -1,21 +1,27 @@
-import { useState } from "react";
+import { useProductsData } from "../shared/hooks/useProductData";
+import type { Product } from "../shared/types/definitions";
+import { useEffect, useState } from "react";
 import { useCart } from "../shared/hooks/useCart";
-import { items } from "../utils/data";
 import ItemCard from "../components/item-card";
 import AppLayout from "../ui/app-layout";
-import SucessPopup from "../ui/sucess-popup";
 
 export default function Menu() {
-  const { addItemToCart, showPopup } = useCart();
-  const [value, setValue] = useState("");
+  const { data } = useProductsData();
+  const { handleAddProduct } = useCart();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [inputValue, setInputValue] = useState("");
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
+    setInputValue(event.target.value);
   };
 
-  const filteredItems = items.filter((item) =>
-    item.nome.toLowerCase().includes(value.toLowerCase()),
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(inputValue.toLowerCase()),
   );
+
+  useEffect(() => {
+    if (data) setProducts(data);
+  }, [data]);
 
   return (
     <>
@@ -29,7 +35,7 @@ export default function Menu() {
             type="text"
             name="name"
             id="name"
-            value={value}
+            value={inputValue}
             onChange={handleSearch}
             placeholder="Pesquise por um produto"
             className="font-lato focus:ring-orange min-w-full rounded-[13px] border border-[#f9f9f9] py-2 pr-4 pl-10 transition-all duration-300 outline-none focus:ring-1 focus:outline-none"
@@ -38,14 +44,14 @@ export default function Menu() {
         </div>
 
         <div className="mx-auto mt-6 grid grid-cols-2 gap-4 lg:grid-cols-5">
-          {filteredItems.length > 0 ? (
-            filteredItems.map(
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map(
               (item) =>
-                item.disponivel && (
+                item.isAvailable && (
                   <ItemCard
                     key={item.id}
                     item={item}
-                    onHandleCart={addItemToCart}
+                    onHandleCart={handleAddProduct}
                   />
                 ),
             )
@@ -56,10 +62,6 @@ export default function Menu() {
           )}
         </div>
       </AppLayout>
-
-      {showPopup.map((popup) => (
-        <SucessPopup key={popup.id} text={popup.text} />
-      ))}
     </>
   );
 }

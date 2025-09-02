@@ -1,19 +1,17 @@
 import { createContext, useState, useMemo } from "react";
-import type { Item } from "../utils/definitions";
+import type { Product } from "../shared/types/definitions";
 
 type CartContextType = {
-  cart: Item[];
-  showPopup: { id: number; text: string }[];
-  addItemToCart: (item: Item) => void;
-  removeItemFromCart: (item: Item) => void;
+  cart: Product[];
+  handleAddProduct: (item: Product) => void;
+  handleRemoveProduct: (item: Product) => void;
   removeAllItemsFromCart: () => void;
 };
 
 export const CartContext = createContext<CartContextType>({
   cart: [],
-  showPopup: [],
-  addItemToCart: () => {},
-  removeItemFromCart: () => {},
+  handleAddProduct: () => {},
+  handleRemoveProduct: () => {},
   removeAllItemsFromCart: () => {},
 });
 
@@ -22,34 +20,38 @@ export default function CartProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [cart, setCart] = useState<Item[]>([]);
+  const [cart, setCart] = useState<Product[]>([]);
 
-  const [showPopup, setShowPopup] = useState<{ id: number; text: string }[]>(
-    [],
-  );
+  const handleAddProduct = (product: Product) => {
+    setCart((prevCart) => {
+      const isProductInCart = prevCart.find((item) => item.id === product.id);
 
-  const handleShowPopup = () => {
-    const newPopup = {
-      id: Date.now(),
-      text: "Item adicionado ao carrinho",
-    };
+      if (isProductInCart) {
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantityInCart: item.quantityInCart + 1 }
+            : item,
+        );
+      }
 
-    setShowPopup((prev) => [...prev, newPopup]);
-
-    setTimeout(() => {
-      setShowPopup((prev) => prev.filter((popup) => popup.id !== newPopup.id));
-    }, 2000);
+      return [...prevCart, { ...product, quantityInCart: 1 }];
+    });
   };
 
-  const addItemToCart = (item: Item) => {
-    setCart((prevCart) => [...prevCart, item]);
-    handleShowPopup();
-  };
+  const handleRemoveProduct = (product: Product) => {
+    setCart((prevCart) => {
+      const isProductInCart = prevCart.find((item) => item.id === product.id);
 
-  const removeItemFromCart = (item: Item) => {
-    setCart((prevCart) =>
-      prevCart.filter((cartItem) => cartItem.id !== item.id),
-    );
+      if (isProductInCart?.quantityInCart === 1) {
+        return prevCart.filter((item) => item.id !== product.id);
+      }
+
+      return prevCart.map((item) =>
+        item.id === product.id
+          ? { ...item, quantityInCart: item.quantityInCart - 1 }
+          : item,
+      );
+    });
   };
 
   const removeAllItemsFromCart = () => {
@@ -59,12 +61,11 @@ export default function CartProvider({
   const value = useMemo(
     () => ({
       cart,
-      showPopup,
       removeAllItemsFromCart,
-      addItemToCart,
-      removeItemFromCart,
+      handleAddProduct,
+      handleRemoveProduct,
     }),
-    [cart, showPopup],
+    [cart],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
