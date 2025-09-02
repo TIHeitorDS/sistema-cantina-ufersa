@@ -3,7 +3,6 @@ import type { Product } from "../shared/types/definitions";
 
 type CartContextType = {
   cart: Product[];
-  addedToCart: { id: number; text: string }[];
   addItemToCart: (item: Product) => void;
   removeItemFromCart: (item: Product) => void;
   removeAllItemsFromCart: () => void;
@@ -11,7 +10,6 @@ type CartContextType = {
 
 export const CartContext = createContext<CartContextType>({
   cart: [],
-  addedToCart: [],
   addItemToCart: () => {},
   removeItemFromCart: () => {},
   removeAllItemsFromCart: () => {},
@@ -24,28 +22,8 @@ export default function CartProvider({
 }) {
   const [cart, setCart] = useState<Product[]>([]);
 
-  const [addedToCart, setAddedToCart] = useState<
-    { id: number; text: string }[]
-  >([]);
-
-  const handleShowPopup = () => {
-    const newPopup = {
-      id: Date.now(),
-      text: "Produto adicionado ao carrinho",
-    };
-
-    setAddedToCart((prev) => [...prev, newPopup]);
-
-    setTimeout(() => {
-      setAddedToCart((prev) =>
-        prev.filter((popup) => popup.id !== newPopup.id),
-      );
-    }, 2000);
-  };
-
   const addItemToCart = (item: Product) => {
     setCart((prevCart) => [...prevCart, item]);
-    handleShowPopup();
   };
 
   const removeItemFromCart = (item: Product) => {
@@ -61,12 +39,11 @@ export default function CartProvider({
   const value = useMemo(
     () => ({
       cart,
-      addedToCart,
       removeAllItemsFromCart,
       addItemToCart,
       removeItemFromCart,
     }),
-    [cart, addedToCart],
+    [cart],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

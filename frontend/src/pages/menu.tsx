@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 import { useCart } from "../shared/hooks/useCart";
 import ItemCard from "../components/item-card";
 import AppLayout from "../ui/app-layout";
-import SucessPopup from "../ui/sucess-popup";
 
 export default function Menu() {
   const { data } = useProductsData();
-  const { addItemToCart, addedToCart } = useCart();
+  const { addItemToCart } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [inputValue, setInputValue] = useState("");
 
@@ -63,13 +62,6 @@ export default function Menu() {
           )}
         </div>
       </AppLayout>
-
-      {addedToCart.map((cartSuccessMessage) => (
-        <SucessPopup
-          key={cartSuccessMessage.id}
-          text={cartSuccessMessage.text}
-        />
-      ))}
     </>
   );
 }
