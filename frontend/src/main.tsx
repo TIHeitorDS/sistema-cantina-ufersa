@@ -3,23 +3,36 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import "./App.css";
 import Menu from "./pages/menu.tsx";
+import Notification from "./pages/notification.tsx";
 import Cart from "./pages/cart.tsx";
-import AdminPage from "./pages/AdminMenuItemsPage.tsx";
-import AddItemPage from "./pages/MenuItemCreatePage.tsx";
-import EditItemPage from "./pages/AdminEditMenuItemPage.tsx";
-import AdminConfig from "./pages/admin-config.tsx";
+import UserOrderList from "./pages/customer-order-list.tsx";
+import UserProfile from "./pages/customer-profile.tsx";
+import CartProvider from "./context/cart-context.tsx";
+import UserProvider from "./context/customer-context.tsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Menu />} />
-        <Route path="/carrinho-de-compras" element={<Cart />} />
-        <Route path="/admin" element={<AdminConfig />} />
+    <QueryClientProvider client={queryClient}>
+      <UserProvider>
+        <CartProvider>
+          <Router>
+            <Routes>
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/list" element={<UserOrderList />} />
+              <Route path="/" element={<Menu />} />
+              <Route path="/notifications" element={<Notification />} />
+              <Route path="/profile" element={<UserProfile />} />
+              {/* <Route path="/admin" element={<AdminConfig />} />
         <Route path="/admin/config" element={<AdminPage />} />
         <Route path="/admin/add-item" element={<AddItemPage />} />
-        <Route path="/admin/edit-item/:id" element={<EditItemPage />} />
-      </Routes>
-    </Router>
-  </StrictMode>
+        <Route path="/admin/edit-item/:id" element={<EditItemPage />} /> */}
+            </Routes>
+          </Router>
+        </CartProvider>
+      </UserProvider>
+    </QueryClientProvider>
+  </StrictMode>,
 );

@@ -1,34 +1,55 @@
-import type { Item } from "../utils/definitions";
+import type { Product } from "../shared/types/definitions";
+import { useLocation } from "react-router";
+import plusIcon from "../assets/plus.svg";
+import minosIcon from "../assets/minus.svg";
+import xIcon from "../assets/x.svg";
 
 export default function ItemCard({
   item,
-  addItemToCart,
+  onHandleCart,
 }: {
-  item: Item;
-  addItemToCart: (item: Item) => void;
+  item: Product;
+  onHandleCart: (item: Product) => void;
 }) {
+  let { pathname } = useLocation();
+  let icon;
+
+  switch (pathname) {
+    case "/":
+      icon = plusIcon;
+      break;
+    case "/cart":
+      icon = minosIcon;
+      break;
+    case "/list":
+      icon = xIcon;
+      break;
+    default:
+      icon = plusIcon; // fallback
+  }
+
   return (
-    <div className="bg-[#fff] h-full flex flex-col justify-between shadow rounded-[23px] py-[15px]">
-      <figure>
+    <div className="flex max-h-fit flex-col justify-between rounded-[23px] bg-[#F9F9F9] px-4.5 py-3.75">
+      <figure className="mx-auto h-36.25 w-full overflow-hidden rounded-2xl">
         <img
-          src={item.imagem}
-          alt={`Imagem de ${item.nome}`}
-          className="w-24 h-24 mx-auto object-fill rounded-2xl"
+          src={item.image}
+          alt={`Imagem de ${item.name}`}
+          className="h-full w-full object-cover object-center"
         />
       </figure>
 
-      <div className="px-2 mt-2">
-        <p className="text-balance">{item.nome}</p>
+      <div className="mt-2 px-2">
+        <p className="truncate text-xl">{item.name}</p>
 
-        <div className="flex justify-between items-center w-full mt-3">
-          <span>R$ {item.preco}</span>
+        <div className="font-lato mt-2.5 flex w-full items-center justify-between">
+          <span className="text-lg">R$ {item.price}</span>
 
           <button
             type="button"
-            className="bg-orange flex justify-center items-center w-7 h-7 rounded-[10px]"
-            onClick={() => addItemToCart(item)}
+            className="bg-orange flex h-10 w-10 items-center justify-center rounded-[10px]"
+            onClick={() => onHandleCart(item)}
           >
-            <img src="/plus.svg" alt="imagem de adição" />
+            <img src={icon} alt="imagem de adição" />
           </button>
         </div>
       </div>

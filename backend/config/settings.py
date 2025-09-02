@@ -40,10 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
-    'cardapio',
-    'pedidos',
-    'clientes',
-    'channels',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -57,17 +54,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://celebrated-dango-a9dbad.netlify.app",
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
-CHANNEL_ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173"
 ]
-
-CRFS_TRUSTED_ORIGINS = ['https://cantina-api.heitor.grupo-02.dependabilidade.ufersa.dev.br']
 
 ROOT_URLCONF = 'config.urls'
 
@@ -89,21 +80,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
-
-# Channels configuration
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
-        'CONFIG': {
-            "expiry": 60 * 60,  # 1 hour
-            # "hosts": [("127.0.0.1", 6379)],  # Note a mudança na sintaxe
-        },
-    },
-}
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     'default': {

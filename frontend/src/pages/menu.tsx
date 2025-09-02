@@ -1,44 +1,67 @@
-import { useState, useEffect } from "react";
-import Footer from "../components/footer";
-import Header from "../components/header";
+import { useProductsData } from "../shared/hooks/useProductData";
+import type { Product } from "../shared/types/definitions";
+import { useEffect, useState } from "react";
+import { useCart } from "../shared/hooks/useCart";
 import ItemCard from "../components/item-card";
-import { fetchItems } from "../utils/query";
-import type { Item } from "../utils/definitions";
+import AppLayout from "../ui/app-layout";
 
 export default function Menu() {
-  const [itemsQty, setItemsQty] = useState<number>(localStorage.length);
-  const [items, setItems] = useState<Item[]>([]); // Ajuste o tipo conforme necessário
+  const { data } = useProductsData();
+  const { handleAddProduct } = useCart();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [inputValue, setInputValue] = useState("");
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(inputValue.toLowerCase()),
+  );
 
   useEffect(() => {
-    fetchItems().then((data) => {
-      setItems(data);
-    });
-  }, []);
-
-  function addItemToCart(item: Item) {
-    setItemsQty((prevQty) => prevQty + 1);
-
-    localStorage.setItem(`cart-${item.id}`, JSON.stringify(item));
-  }
+    if (data) setProducts(data);
+  }, [data]);
 
   return (
-    <div className="h-svh overflow-hidden">
-      <Header />
+    <>
+      <AppLayout title="Menu">
+        <div className="relative mt-2 w-full">
+          <span className="pointer-events-none absolute top-1/2 left-2 -translate-y-1/2 transform">
+            <img src="/search.svg" alt="Buscar" className="h-6 w-6" />
+          </span>
 
-      <div className="mt-6 px-9 grid grid-cols-2 lg:grid-cols-5 mx-auto gap-4 overflow-scroll min-h-fit max-h-[450px] pb-24">
-        {items.map(
-          (item) =>
-            item.disponivel && (
-              <ItemCard
-                key={item.id}
-                item={item}
-                addItemToCart={addItemToCart}
-              />
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value={inputValue}
+            onChange={handleSearch}
+            placeholder="Pesquise por um produto"
+            className="font-lato focus:ring-orange min-w-full rounded-[13px] border border-[#f9f9f9] py-2 pr-4 pl-10 transition-all duration-300 outline-none focus:ring-1 focus:outline-none"
+            autoComplete="off"
+          />
+        </div>
+
+        <div className="mx-auto mt-6 grid grid-cols-2 gap-4 lg:grid-cols-5">
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map(
+              (item) =>
+                item.isAvailable && (
+                  <ItemCard
+                    key={item.id}
+                    item={item}
+                    onHandleCart={handleAddProduct}
+                  />
+                ),
             )
-        )}
-      </div>
-
-      <Footer itemsQty={itemsQty} />
-    </div>
+          ) : (
+            <div className="col-span-2 text-center">
+              <p className="text-black/25">Nenhum item encontrado</p>
+            </div>
+          )}
+        </div>
+      </AppLayout>
+    </>
   );
 }

@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router";
 import ItemCard from "../components/admin/ItemCard";
 import BackButton from "../components/back-button";
-import type { Item } from "../utils/definitions";
+import type { Product } from "../shared/types/definitions";
 import { useEffect, useState } from "react";
 import { fetchItems } from "../utils/query";
 
 export default function AdminPage() {
   const navigate = useNavigate();
-  const [items, setItems] = useState<Item[]>([]);
+  const [items, setItems] = useState<Product[]>([]);
 
   useEffect(() => {
     const loadItems = async () => {
@@ -24,21 +24,21 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen bg-[#F5F5F5] text-black">
-      <div className="bg-[#005C73] text-white pt-27 pb-5 px-6 text-center text-[32px] font-bold">
+      <div className="bg-[#005C73] px-6 pt-27 pb-5 text-center text-[32px] font-bold text-white">
         Gerenciamento de itens
       </div>
 
-      <div className="p-4 max-w-md mx-auto space-y-4">
+      <div className="mx-auto max-w-md space-y-4 p-4">
         <BackButton />
 
         <div className="flex items-center justify-between gap-2">
           <button
             onClick={() => navigate("/admin/add-item")}
-            className="p-2 flex justify-between items-center gap-2 bg-white rounded-lg shadow border border-[#f2f2f2] w-full"
+            className="flex w-full items-center justify-between gap-2 rounded-lg border border-[#f2f2f2] bg-white p-2 shadow"
           >
             <span className="font-lato text-[#000000]/25">Adicionar item</span>
 
-            <div className="bg-orange rounded-[10px] p-2 flex items-center justify-center w-8 h-8">
+            <div className="bg-orange flex h-8 w-8 items-center justify-center rounded-[10px] p-2">
               <img src="/plus.svg" alt="ícone para voltar à página anterior" />
             </div>
           </button>
